@@ -71,13 +71,18 @@ WEB DEVELOPMENT
 │   ├── Route 53
 │   └── CloudWatch
 │
-├── DevOps
-│   ├── Git
-│   ├── CI/CD
-│   ├── Docker registry
-│   ├── Automated testing
-│   ├── Deployment
-│   └── Rollbacks
+├── DevOps & Automation
+│   ├── Git & GitHub
+│   ├── GitHub Actions
+│   ├── CI/CD pipelines
+│   ├── Automated testing & linting (CI)
+│   ├── Automated Docker image build & scan
+│   ├── Docker registry (Amazon ECR / Docker Hub)
+│   ├── Automated deployment to AWS (CD)
+│   ├── Automated database migrations
+│   ├── Secrets management (GitHub Secrets / AWS Secrets Manager)
+│   ├── Zero-downtime deployment (Rolling / Blue-Green)
+│   └── Automated rollbacks
 │
 └── System Design
     ├── Caching
@@ -115,8 +120,8 @@ V4  → Performance
 V5  → Scale
       Docker + multiple servers + load balancer
 
-V6  → Production
-      AWS + HTTPS + DNS + monitoring + CI/CD
+V6  → Production & CI/CD Automation
+      AWS + HTTPS + DNS + monitoring + GitHub Actions (automated test, build, push & deploy)
 
 V7  → Distributed system
       Queues + workers + replicas + failure handling
