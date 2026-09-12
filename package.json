@@ -1,0 +1,30 @@
+{
+  "name": "urlshortner-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A full-stack URL shortener built progressively from idea to production-scale infrastructure.",
+  "homepage": "https://github.com/mohitchhapola/urlshortner#readme",
+  "bugs": {
+    "url": "https://github.com/mohitchhapola/urlshortner/issues"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.0",
+    "typescript": "^5.8.0"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohitchhapola/urlshortner.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "clean": "turbo clean"
+  }
+}

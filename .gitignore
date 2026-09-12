@@ -1,0 +1,23 @@
+.DS_Store
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build artifacts
+dist/
+build/
+.next/
+out/
+
+# Turborepo cache
+.turbo/
+
+# Environment files
+.env
+.env*.local
+.env.production
+.env.development
+
+# Logs & OS
+*.log
+.DS_Store
