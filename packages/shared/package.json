@@ -4,5 +4,11 @@
   "private": true,
   "scripts": {
     "build": "echo 'shared build ready'"
+  },
+  "devDependencies": {
+    "@urlshortner/typescript-config": "workspace:*"
+  },
+  "dependencies": {
+    "zod": "^4.6.5"
   }
 }
