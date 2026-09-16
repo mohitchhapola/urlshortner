@@ -1,13 +1,28 @@
 import { z } from "zod";
 
-const CreateUrlInput = z.object({
-    url: z.url().min(1, "URL is required").max(1000, "URL is too long"),
+export const CreateUrlInput = z.object({
+  url: z
+    .url({
+      protocol: /^https?$/,
+      error: "URL must use HTTP or HTTPS",
+    })
+    .max(2048, "URL must not exceed 2048 characters"),
+}).strict();
 
-})
-export type CreateUrlInputType = z.infer<typeof CreateUrlInput>;
+export type CreateUrlInput = z.infer<typeof CreateUrlInput>;
 
-const SigninInput = z.object({
-    email: z.email("Invalid email"),
-    password: z.string().min(6, "Password must be at least 6 characters long"),
-})
-export type SigninInputType = z.infer<typeof SigninInput>;
+export const SignInInput = z
+  .object({
+    email: z
+      .email("Please enter a valid email address")
+      .trim()
+      .toLowerCase(),
+
+    password: z
+      .string()
+      .min(1, "Password is required")
+      .max(128, "Password is too long"),
+  })
+  .strict();
+
+export type SignInInput = z.infer<typeof SignInInput>;
