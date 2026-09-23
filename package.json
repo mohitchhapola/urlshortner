@@ -26,8 +26,6 @@
     "lint": "turbo lint",
     "test": "turbo test",
     "clean": "turbo clean"
-  },
-  "dependencies": {
-    "@prisma/client": "^7.10.0"
   }
+
 }
