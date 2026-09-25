@@ -1,18 +1,22 @@
 import { Injectable } from '@nestjs/common';
-import { handleErrors } from '../../common/validation/execption.filter.js';
+// import { handleErrors } from '../../common/validation/execption.filter.js';
+import { PrismaService } from '../../common/database/prisma/prisma.service.js';
 
 @Injectable()
 export class UrlsService {
 
-    constructor() {}
+  constructor(
+    private readonly prisma: PrismaService
+  ) { }
 
-    private async generateUniqueCode(): Promise<string> {
+  private async generateUniqueCode(): Promise<string> {
     for (let attempt = 0; attempt < 5; attempt++) {
-      const code = this.shortCodeService.generate();
+      // const code = this.shortCodeService.generate();
+      const code = Math.random().toString(36).substring(2, 8);
 
-      const exists = await this.shortUrlModel.findOne({
-        where: { short_code: code},
-      });   
+      const exists = await this.prisma.urls.findFirst({
+        where: { short_code: code },
+      });
 
       if (!exists) {
         // return code;
@@ -25,24 +29,27 @@ export class UrlsService {
 
 
   async create(dto: any): Promise<any> {
-    try{
+    try {
 
-        const code = await this.generateUniqueCode();
-    
-        const shortUrl = await this.shortUrlModel.create({
+      const code = await this.generateUniqueCode();
+
+      const shortUrl = await this.prisma.urls.create({
+        data: {
           short_code: code,
-          original_Url: dto.originalUrl,
-        });
-    
-        return {
-          code: shortUrl.short_code,
-          originalUrl: shortUrl.original_Url,
-          shortUrl: `https://yourdomain.com/${shortUrl.short_code}`,
-        };
+          original_url: dto.originalUrl,
+          userid: dto.userid
+        }
+      });
+
+      return {
+        code: shortUrl.short_code,
+        originalUrl: shortUrl.original_url,
+        shortUrl: `https://yourdomain.com/${shortUrl.short_code}`,
+      };
     } catch (error) {
-        console.error('Error creating short URL:', error);
-        throw new Error('Failed to create short URL');-
-        // handleErrors(error);    later on we will build a custom error handler to handle errors in a more structured way
+      console.error('Error creating short URL:', error);
+      throw new Error('Failed to create short URL');
+      // handleErrors(error);    later on we will build a custom error handler to handle errors in a more structured way
     }
   }
 
