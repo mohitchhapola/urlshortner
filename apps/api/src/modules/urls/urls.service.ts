@@ -11,7 +11,7 @@ export class UrlsService {
       const code = this.shortCodeService.generate();
 
       const exists = await this.shortUrlModel.findOne({
-        where: { code },
+        where: { short_code: code},
       });   
 
       if (!exists) {
@@ -30,14 +30,14 @@ export class UrlsService {
         const code = await this.generateUniqueCode();
     
         const shortUrl = await this.shortUrlModel.create({
-          code,
-          originalUrl: dto.originalUrl,
+          short_code: code,
+          original_Url: dto.originalUrl,
         });
     
         return {
-          code: shortUrl.code,
-          originalUrl: shortUrl.originalUrl,
-          shortUrl: `https://yourdomain.com/${shortUrl.code}`,
+          code: shortUrl.short_code,
+          originalUrl: shortUrl.original_Url,
+          shortUrl: `https://yourdomain.com/${shortUrl.short_code}`,
         };
     } catch (error) {
         console.error('Error creating short URL:', error);
